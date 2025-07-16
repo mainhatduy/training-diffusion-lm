@@ -2,6 +2,13 @@
   "identity": {
     "file_name": "identity.json"
   },
+  "my_dataset": {
+    "file_name": "test_ner_sft.json",
+    "columns": {
+        "prompt": "instruction",
+        "response": "output"
+    }
+  },
   "alpaca_en_demo": {
     "file_name": "alpaca_en_demo.json"
   },

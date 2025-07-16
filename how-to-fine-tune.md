@@ -15,6 +15,7 @@ Perfect! Để **chỉ fine-tune mô hình** mà không cần training từ đ�
 ```bash
 cd LLaMA-Factory
 pip install -e ".[torch,metrics]"
+pip install ninja
 pip install flash-attn==2.6.3 --no-build-isolation
 ```
 
