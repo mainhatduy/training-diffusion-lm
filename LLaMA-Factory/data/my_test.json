@@ -1,0 +1,26 @@
+[
+  {
+    "instruction": "<ner>\nTiêm chủng vaccine ngừa virus SARS-CoV-2 là biện pháp hiệu quả.\n</ner>",
+    "output": ""
+  },
+  {
+    "instruction": "<ner>\nBệnh nhân được chẩn đoán mắc bệnh lao phổi và được điều trị theo phác đồ của WHO.\n</ner>",
+    "output": ""
+  },
+  {
+    "instruction": "<ner>\nKhoa Hồi sức tích cực tại Bệnh viện Bạch Mai đã tiếp nhận bệnh nhân nguy kịch.\n</ner>",
+    "output": ""
+  },
+  {
+    "instruction": "<ner>\nThuốc Paracetamol 500mg được sử dụng để hạ sốt cho trẻ em.\n</ner>",
+    "output": ""
+  },
+  {
+    "instruction": "<ner>\nTrung tâm Kiểm soát bệnh tật TP. Hồ Chí Minh khuyến cáo người dân đeo khẩu trang y tế.\n</ner>",
+    "output": ""
+  },
+  {
+    "instruction": "<ner>\nPhác đồ điều trị HIV/AIDS được cập nhật mới nhất năm 2025.\n</ner>",
+    "output": ""
+  }
+]

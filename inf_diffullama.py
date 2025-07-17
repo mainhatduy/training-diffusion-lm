@@ -60,7 +60,8 @@ if __name__ == "__main__":
 
     # conditional generation
     print("="*20, "Prefix gen...")
-    prefix = [tokenizer.bos_token_id] + tokenizer.encode("Today is a wonderful day,")
+    instruction = "<ner>\nTiêm chủng vaccine ngừa virus SARS-CoV-2 là biện pháp hiệu quả.\n</ner>"
+    prefix = [tokenizer.bos_token_id] + tokenizer.encode(instruction)
 
     src_mask = [1]*len(prefix)+[0]*(gen_len-len(prefix))
     x0 = prefix + [0]*(gen_len-len(prefix))

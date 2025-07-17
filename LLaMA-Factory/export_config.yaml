@@ -1,0 +1,10 @@
+### model
+model_name_or_path: diffusionfamily/diffullama
+adapter_name_or_path: output/my-diffullama-finetuned-v2/
+hf_hub_token: <hf_token>
+template: empty
+finetuning_type: lora
+
+### export
+export_dir: ./exported_model
+export_hub_model_id: "myduy/test-diffusionlm-v2" 

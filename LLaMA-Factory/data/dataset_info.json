@@ -9,6 +9,13 @@
         "response": "output"
     }
   },
+  "my_test": {
+    "file_name": "my_test.json",
+    "columns": {
+        "prompt": "instruction",
+        "response": "output"
+    }
+  },
   "alpaca_en_demo": {
     "file_name": "alpaca_en_demo.json"
   },
