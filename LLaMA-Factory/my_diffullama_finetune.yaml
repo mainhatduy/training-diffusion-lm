@@ -12,7 +12,7 @@ finetuning_type: full
 ### dataset
 dataset: my_dataset
 template: empty
-cutoff_len: 256
+cutoff_len: 128
 streaming: false
 overwrite_cache: true
 
@@ -25,9 +25,10 @@ save_steps: 200
 # hub_model_id: myduy/test-diffusionlm-v2
 
 ### train
-per_device_train_batch_size: 1
-gradient_accumulation_steps: 128
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 1
 learning_rate: 5.0e-6
+weight_decay: 0.01
 warmup_ratio: 0.1
 lr_scheduler_type: cosine
 num_train_epochs: 3.0
