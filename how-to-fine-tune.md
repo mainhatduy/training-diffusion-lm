@@ -17,6 +17,7 @@ cd LLaMA-Factory
 pip install -e ".[torch,metrics]"
 pip install ninja
 pip install flash-attn --no-build-isolation
+pip install bitsandbytes
 ```
 
 ### **3. Chuẩn bị dữ liệu**

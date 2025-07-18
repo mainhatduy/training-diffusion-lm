@@ -4,8 +4,8 @@ hf_hub_token:
 print_param_status: true
 
 ### method
-# stage: ddm-sft
-stage: ddm
+stage: ddm-sft
+# stage: ddm
 do_train: true
 finetuning_type: full
 
@@ -25,8 +25,8 @@ save_steps: 200
 # hub_model_id: myduy/test-diffusionlm-v2
 
 ### train
-per_device_train_batch_size: 2
-gradient_accumulation_steps: 1
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 128
 learning_rate: 5.0e-6
 warmup_ratio: 0.1
 lr_scheduler_type: cosine
@@ -34,11 +34,11 @@ num_train_epochs: 3.0
 bf16: true
 anneal_steps: 1
 shift: true
+optim: adamw_8bit
 
 ### wandb logging
 report_to: wandb
 run_name: finetune-dream-7b-v1
-
 
 ### optional: push to huggingface hub after training
 export_hub_model_id: "myduy/test-diffusionlm-v3"
