@@ -1,5 +1,5 @@
 ### model
-model_name_or_path: diffusionfamily/diffullama
+model_name_or_path: Dream-org/Dream-v0-Instruct-7B
 hf_hub_token: 
 print_param_status: true
 
@@ -29,16 +29,18 @@ save_steps: 100
 ### train
 per_device_train_batch_size: 8
 gradient_accumulation_steps: 2
-learning_rate: 1.0e-4
-num_train_epochs: 1.0
+learning_rate: 5e-6
+warmup_ratio: 0.1
+lr_scheduler_type: "linear"
+num_train_epochs: 3.0
 bf16: true
 anneal_steps: 1
 shift: true
 
 ### wandb logging
 report_to: wandb
-run_name: finetune-diffusion-lm-v1
+run_name: finetune-dream-7b-v1
 
 
 ### optional: push to huggingface hub after training
-export_hub_model_id: "myduy/test-diffusionlm-v2"
+export_hub_model_id: "myduy/test-diffusionlm-v3"

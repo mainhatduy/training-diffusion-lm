@@ -216,12 +216,20 @@ def preprocess_partical_dataset(examples: Dict[str, List[Any]], tokenizer: "PreT
     # single turn
     model_inputs = {"input_ids": [], "attention_mask": [], "src_mask": []}
 
-    # sep_token_id = 9166 # ====== for llama
-    # sep_token_id = 1647 # ====== for mistral
-    # pad_token_id = 258 # <0xFF> for llama
+    # Handle DreamTokenizer special case
     sep_token_id = tokenizer.sep_token_id
     pad_token_id = tokenizer.pad_token_id
-    # import pdb; pdb.set_trace();
+    bos_token_id = tokenizer.bos_token_id
+    eos_token_id = tokenizer.eos_token_id
+    
+    # For DreamTokenizer compatibility
+    if bos_token_id is None:
+        bos_token_id = eos_token_id  # Use eos_token as fallback
+    if sep_token_id is None:
+        sep_token_id = 4936  # fallback for diffu-llama
+    if pad_token_id is None:
+        pad_token_id = eos_token_id  # Use eos_token as pad
+
     examples_prompt = [messages[0]["content"] for messages in examples["prompt"]]
     examples_output = [messages[0]["content"] for messages in examples["response"]]
 
@@ -232,11 +240,23 @@ def preprocess_partical_dataset(examples: Dict[str, List[Any]], tokenizer: "PreT
             tgt_ids = tgt_ids[:(data_args.cutoff_len-3)]
             src_ids = src_ids[-(data_args.cutoff_len-3-len(tgt_ids)):]
         
-        input_ids = [tokenizer.bos_token_id] + src_ids + [sep_token_id] + tgt_ids + [tokenizer.eos_token_id]
+        # Build input_ids - only add tokens that are not None
+        input_ids = []
+        if bos_token_id is not None:
+            input_ids.append(bos_token_id)
+        input_ids.extend(src_ids)
+        if sep_token_id is not None:
+            input_ids.append(sep_token_id)
+        input_ids.extend(tgt_ids)
+        if eos_token_id is not None:
+            input_ids.append(eos_token_id)
 
         model_inputs["input_ids"].append(input_ids)
         model_inputs["attention_mask"].append([1] * len(input_ids))
-        model_inputs["src_mask"].append([1] * (len(src_ids) + 2))
+        # Adjust src_mask calculation based on actual tokens added
+        bos_count = 1 if bos_token_id is not None else 0
+        sep_count = 1 if sep_token_id is not None else 0
+        model_inputs["src_mask"].append([1] * (len(src_ids) + bos_count + sep_count))
         
     model_inputs["input_ids"] = pad_sequence(model_inputs["input_ids"], padding_value=pad_token_id, cut_len=data_args.cutoff_len)
     model_inputs["labels"] = model_inputs["input_ids"]

@@ -26,6 +26,8 @@ from .model_utils.mod import convert_pretrained_model_to_mod, load_mod_pretraine
 from .model_utils.unsloth import load_unsloth_pretrained_model
 from .model_utils.valuehead import load_valuehead_params
 from .model_utils.visual import get_image_seqlen
+from .model_utils.dream_support import is_dream_config, load_dream_model
+
 from .patcher import patch_config, patch_model, patch_tokenizer, patch_valuehead_model
 from safetensors.torch import load_file
 
@@ -204,6 +206,9 @@ def load_model(
 
         if model_args.mixture_of_depths == "load":
             model = load_mod_pretrained_model(**init_kwargs)
+        # Add Dream model support
+        elif is_dream_config(config):
+            model = load_dream_model(model_args, init_kwargs)
         else:
             if type(config) in AutoModelForVision2Seq._model_mapping.keys():  # assume built-in models
                 load_class = AutoModelForVision2Seq
@@ -217,6 +222,7 @@ def load_model(
 
         if model_args.mixture_of_depths == "convert":
             model = convert_pretrained_model_to_mod(model, config, model_args)
+
 
     if not lazy_load:
         patch_model(model, tokenizer, model_args, is_trainable, add_valuehead)
