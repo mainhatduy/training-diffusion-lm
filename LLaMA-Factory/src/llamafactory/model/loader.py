@@ -192,6 +192,8 @@ def load_model(
     config = load_config(model_args)
     patch_config(config, tokenizer, model_args, init_kwargs, is_trainable)
 
+    print('='*200)
+    print(finetuning_args)
     model = None
     lazy_load = False
     if model_args.use_unsloth:
@@ -235,6 +237,8 @@ def load_model(
         # import pdb; pdb.set_trace();
         checkpoint_dir = model_args.checkpoint_dir
         loaded = None
+        # print('='*200)
+        # print(count_parameters(model))
         if checkpoint_dir is not None: # for sampling
             if os.path.exists(os.path.join(checkpoint_dir, 'model.safetensors')):
                 loaded = load_file(

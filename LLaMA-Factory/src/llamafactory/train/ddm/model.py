@@ -48,6 +48,11 @@ class DiscreteDiffusionModel(PreTrainedModel):
             self.denoise_model = self.model.model
             self.lm_head = self.model.lm_head
             del self.denoise_model.embed_tokens
+        elif getattr(self.config, "model_type", None) == "Dream":
+            self.embed_tokens = self.model.model.embed_tokens
+            self.denoise_model = self.model.model
+            self.lm_head = self.model.lm_head
+            del self.denoise_model.embed_tokens
         del self.model
 
     def get_logits(self, hidden_repr):

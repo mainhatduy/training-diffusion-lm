@@ -4,12 +4,10 @@ hf_hub_token:
 print_param_status: true
 
 ### method
-stage: ddm-sft
+# stage: ddm-sft
+stage: ddm
 do_train: true
-finetuning_type: lora
-lora_target: all
-additional_target: embed_tokens
-lora_rank: 16
+finetuning_type: full
 
 ### dataset
 dataset: my_dataset
@@ -22,16 +20,16 @@ overwrite_cache: true
 output_dir: output/my-diffullama-finetuned-v3/
 logging_steps: 10
 save_total_limit: 1
-save_steps: 100
+save_steps: 200
 # push_to_hub: true
 # hub_model_id: myduy/test-diffusionlm-v2
 
 ### train
-per_device_train_batch_size: 8
-gradient_accumulation_steps: 2
-learning_rate: 5e-6
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 1
+learning_rate: 5.0e-6
 warmup_ratio: 0.1
-lr_scheduler_type: "linear"
+lr_scheduler_type: cosine
 num_train_epochs: 3.0
 bf16: true
 anneal_steps: 1
