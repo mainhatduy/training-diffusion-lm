@@ -2,7 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+LLaMA-Factory/output
+LLaMA-Factory/exported_model
 # C extensions
 *.so
 

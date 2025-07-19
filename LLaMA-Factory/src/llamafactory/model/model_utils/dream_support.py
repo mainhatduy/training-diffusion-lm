@@ -14,7 +14,7 @@
 
 import torch
 from typing import TYPE_CHECKING, Optional, Any, Dict
-from transformers import LlamaConfig, LlamaForCausalLM
+from transformers import LlamaConfig, AutoModelForCausalLM
 from transformers.models.llama.modeling_llama import LlamaModel
 
 from ...extras.logging import get_logger
@@ -83,17 +83,17 @@ def load_dream_model(model_args, init_kwargs: Dict[str, Any]):
     llama_config = convert_dream_config_to_llama(original_config)
     init_kwargs["config"] = llama_config
     
-    # Load model using LlamaForCausalLM
+    # Load model using AutoModelForCausalLM
     if model_args.train_from_scratch:
-        model = LlamaForCausalLM.from_config(llama_config)
+        model = AutoModelForCausalLM.from_config(llama_config)
     else:
         try:
             # Try to load with trust_remote_code first
-            model = LlamaForCausalLM.from_pretrained(**init_kwargs)
+            model = AutoModelForCausalLM.from_pretrained(**init_kwargs)
         except Exception as e:
             logger.warning(f"Failed to load Dream model directly: {e}")
             logger.info("Creating new Llama model with Dream config...")
-            model = LlamaForCausalLM.from_config(llama_config)
+            model = AutoModelForCausalLM.from_config(llama_config)
     
     # Store original config for reference
     model.config._original_dream_config = original_config

@@ -1,10 +1,22 @@
 ### model
-model_name_or_path: diffusionfamily/diffullama
-adapter_name_or_path: output/my-diffullama-finetuned-v2/
-hf_hub_token: <hf_token>
+model_name_or_path: output/my-diffullama-finetuned-v3/checkpoint-237
+hf_hub_token: 
 template: empty
-finetuning_type: lora
+finetuning_type: full
 
 ### export
 export_dir: ./exported_model
-export_hub_model_id: "myduy/test-diffusionlm-v2" 
+export_hub_model_id: "myduy/test-diffusionlm-7b-v1"
+
+
+
+# ### model
+# model_name_or_path: diffusionfamily/diffullama
+# adapter_name_or_path: output/my-diffullama-finetuned-v3/
+# hf_hub_token: 
+# template: empty
+# finetuning_type: full
+
+# ### export
+# export_dir: ./exported_model
+# export_hub_model_id: "myduy/test-diffusionlm-7b-v1" 
